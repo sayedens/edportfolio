@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Redup — websites & systems that work</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,500;1,700;1,900&family=Archivo:wght@400;600;800&display=swap" rel="stylesheet">
+<style>
+:root{--ink:#0a1530;--denim:#1b3270;--tee:#efe6d2;--yellow:#d9c7a0;--red:#c8201a;--leather:#122552;--bg:var(--ink);--fg:var(--tee);
+box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:var(--ink);--fg:var(--tee)}}
+html{scroll-behavior:smooth;scroll-padding-top:env(safe-area-inset-top,0px)}
+*{box-sizing:border-box;margin:0}
+body{background:var(--bg);color:var(--fg);font-family:Archivo,Arial,sans-serif;overflow-x:hidden;line-height:1.5}
+body::after{content:"";position:fixed;inset:0;pointer-events:none;z-index:50;opacity:.09;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence baseFrequency='.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='160' height='160' filter='url(%23n)'/%3E%3C/svg%3E")}
+h1,h2,h3{font-family:'Playfair Display',Georgia,serif;font-style:italic;font-weight:900;line-height:1;letter-spacing:-.02em}
+.marker{font-family:'Playfair Display',Georgia,serif;font-style:italic;font-weight:500;color:var(--yellow)}
+#bar{position:fixed;top:env(safe-area-inset-top,0px);left:0;height:5px;width:0;background:var(--red);z-index:60}
+nav{position:fixed;top:env(safe-area-inset-top,0px);left:0;right:0;display:flex;justify-content:space-between;align-items:center;padding:14px 22px;z-index:40;mix-blend-mode:difference;color:#fff}
+nav b{font-family:'Playfair Display',serif;font-style:italic;font-weight:900;font-size:26px}
+nav a{color:inherit;text-decoration:none;margin-left:18px;font-weight:600;font-size:14px}
+nav a:hover{text-decoration:line-through}
+section{position:relative}
+.wrap{max-width:1180px;margin:0 auto;padding:0 22px}
+/* hero */
+#hero{min-height:100vh;display:flex;flex-direction:column;justify-content:center;overflow:hidden;background:radial-gradient(circle at 70% 30%,#22407f 0,transparent 55%)}
+#hero h1{font-size:clamp(96px,24vw,360px);padding-right:.1em;color:var(--tee);display:flex;flex-wrap:wrap;margin-top:40px;user-select:none}
+#hero h1 span{display:inline-block;transition:transform .15s ease-out;will-change:transform}
+#hero h1 span:nth-child(2n){-webkit-text-stroke:2px var(--tee);color:transparent}
+#hero h1 span:last-child{color:var(--red);-webkit-text-stroke:0}
+.sub{max-width:520px;font-size:clamp(17px,2.2vw,22px);margin-top:18px}
+.sub em{font-style:normal;background:var(--yellow);color:#000;padding:0 6px;font-weight:800}
+.hint{position:absolute;right:22px;bottom:26px;font-size:13px;opacity:.7}
+.sticker{position:absolute;cursor:grab;user-select:none;touch-action:none;z-index:5;font-family:'Playfair Display',serif;font-style:italic;font-weight:900;text-align:center;box-shadow:3px 4px 0 rgba(0,0,0,.5);transition:box-shadow .15s}
+.sticker:active{cursor:grabbing;box-shadow:8px 10px 0 rgba(0,0,0,.45)}
+.s1{top:18%;right:9%;background:var(--yellow);color:#000;padding:18px 20px;font-size:26px;transform:rotate(-8deg);border:3px solid #000}
+.s2{top:56%;right:20%;background:var(--red);color:var(--tee);border-radius:50%;width:124px;height:124px;display:grid;place-items:center;font-size:21px;transform:rotate(11deg);line-height:1}
+.s3{top:36%;right:30%;background:var(--tee);color:#000;padding:10px 16px;font-size:19px;transform:rotate(5deg);border:3px dashed #000}
+/* marquee */
+.band{background:var(--red);color:var(--tee);overflow:hidden;white-space:nowrap;padding:14px 0;border-block:4px solid #000;transform:rotate(-1.6deg) scale(1.04);margin:40px 0;position:relative;z-index:6}
+.band div{display:inline-block;font-family:'Playfair Display',serif;font-style:italic;font-weight:700;font-size:clamp(28px,5vw,54px);will-change:transform}
+/* about */
+#about{padding:110px 0}
+#about h2{font-size:clamp(46px,9vw,120px);max-width:11ch}
+.reveal{overflow:hidden;padding-bottom:.14em}
+.reveal>*{display:block;transform:translateY(105%);transition:transform .9s cubic-bezier(.2,.8,.2,1)}
+.reveal.in>*{transform:none}
+.cols{display:grid;grid-template-columns:1.1fr 1fr;gap:50px;margin-top:50px}
+.cols p{font-size:19px;max-width:56ch;margin-bottom:18px}
+.tag{border:3px solid var(--tee);padding:22px;transform:rotate(2deg);background:var(--denim);align-self:start;transition:transform .3s}
+.tag:hover{transform:rotate(-1deg) scale(1.02)}
+.tag h3{font-size:34px;margin-bottom:10px;color:var(--yellow)}
+.tag li{list-style:none;padding:7px 0;border-bottom:1px dashed #ece6d655}
+/* work (horizontal) */
+#work{height:400vh;background:var(--tee);color:#000}
+#work .pin{position:sticky;top:0;height:100vh;overflow:hidden;display:flex;align-items:center}
+#track{display:flex;gap:34px;padding:0 8vw;will-change:transform}
+.intro{flex:0 0 min(70vw,520px)}
+.intro h2{font-size:clamp(70px,13vw,190px);color:var(--red)}
+.card{flex:0 0 min(82vw,520px);height:min(68vh,520px);background:var(--ink);color:var(--tee);padding:28px;display:flex;flex-direction:column;justify-content:space-between;border:4px solid #000;box-shadow:12px 12px 0 var(--red);transition:transform .25s,box-shadow .25s;cursor:pointer;position:relative;overflow:hidden}
+.card:nth-child(3){background:var(--denim)}
+.card:nth-child(4){background:var(--leather)}
+.card:hover{transform:translate(-6px,-6px) rotate(-1deg);box-shadow:20px 20px 0 var(--yellow)}
+.card h3{font-size:clamp(40px,6vw,66px)}
+.card .big{position:absolute;right:-10px;top:-24px;font-family:'Playfair Display',serif;font-style:italic;font-weight:900;font-size:190px;opacity:.12;line-height:1}
+.card p{max-width:36ch}
+.chips{display:flex;gap:8px;flex-wrap:wrap}
+.chips i{font-style:normal;border:2px solid currentColor;padding:2px 10px;font-weight:600;font-size:13px}
+.more{max-height:0;overflow:hidden;transition:max-height .4s;font-size:15px}
+.card.open .more{max-height:140px}
+.prog{position:absolute;left:8vw;right:8vw;bottom:5vh;height:6px;background:#0002}
+.prog b{display:block;height:100%;width:0;background:var(--red)}
+/* services */
+#services{padding:120px 0;background:var(--denim)}
+#services h2{font-size:clamp(50px,10vw,140px);margin-bottom:46px}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:26px}
+.flip{perspective:900px;height:300px;cursor:pointer;background:none;border:0;color:inherit;font:inherit;text-align:left;padding:0}
+.flip .in2{position:relative;width:100%;height:100%;transition:transform .7s cubic-bezier(.3,1.3,.5,1);transform-style:preserve-3d}
+.flip.on .in2,.flip:focus-visible .in2{transform:rotateY(180deg)}
+.flip:focus-visible{outline:3px solid var(--yellow);outline-offset:4px}
+.face{position:absolute;inset:0;backface-visibility:hidden;padding:24px;border:3px solid var(--tee);display:flex;flex-direction:column;justify-content:space-between}
+.front{background:var(--ink)}
+.front h3{font-size:44px}
+.back{background:var(--yellow);color:#000;transform:rotateY(180deg);border-color:#000}
+.back p{font-weight:600;font-size:17px}
+/* contact */
+#contact{padding:130px 0 70px;background:var(--red);color:var(--tee);text-align:center;overflow:hidden}
+#contact h2{font-size:clamp(60px,16vw,260px)}
+#contact .marker{display:block;margin:18px 0 34px;color:var(--yellow);font-size:clamp(16px,2.4vw,26px)}
+.btn{display:inline-block;background:var(--ink);color:var(--tee);border:4px solid #000;padding:18px 34px;font-family:'Playfair Display',serif;font-style:italic;font-weight:900;font-size:28px;text-decoration:none;cursor:pointer;box-shadow:7px 7px 0 var(--yellow);transition:transform .15s,box-shadow .15s;margin:6px}
+.btn:hover{transform:translate(-3px,-3px);box-shadow:11px 11px 0 var(--yellow)}
+.btn:active{transform:translate(5px,5px);box-shadow:2px 2px 0 var(--yellow)}
+footer{margin-top:80px;font-size:13px;opacity:.85}
+@media(max-width:760px){.cols{grid-template-columns:1fr}.sticker{transform:scale(.8)}.s3{display:none}nav a{margin-left:10px}.hint{display:none}}
+@media(prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}.reveal>*{transform:none}}
+</style>
+</head>
+<body>
+<div id="bar"></div>
+<nav><b>REDUP</b><div><a href="#about">About</a><a href="#work">Work</a><a href="#services">Services</a><a href="#contact">Contact</a></div></nav>
+
+<section id="hero">
+  <div class="wrap">
+    <span class="marker">web dev crew, Malaysia</span>
+    <h1 id="logo" aria-label="Redup"><span>R</span><span>e</span><span>d</span><span>u</span><span>p</span></h1>
+    <p class="sub">We build websites and business systems that look loud and run clean. <em>Order systems, portfolios, dashboards.</em></p>
+  </div>
+  <div class="sticker s1" data-px="-.06">Now booking<br>2027 projects</div>
+  <div class="sticker s2" data-px=".08">100%<br>built<br>custom</div>
+  <div class="sticker s3" data-px="-.03">drag me</div>
+  <span class="hint">scroll down ↓ and move your mouse over the logo</span>
+</section>
+
+<div class="band"><div id="m1">Websites ✦ Ordering systems ✦ Dashboards ✦ Redup ✦ Websites ✦ Ordering systems ✦ Dashboards ✦ Redup ✦ Websites ✦ Ordering systems ✦ Dashboards ✦ Redup ✦ Websites ✦ Ordering systems ✦ Dashboards ✦ Redup ✦</div></div>
+
+<section id="about"><div class="wrap">
+  <h2 class="reveal"><span>Small team. Real systems.</span></h2>
+  <div class="cols">
+    <div>
+      <p>Redup is a small web development company run by a Diploma in Computer Science graduate from UiTM.</p>
+      <p>I don’t just make pages. I’ve built working systems for real businesses: ordering, management and tracking that staff actually use every day.</p>
+      <p class="marker" style="font-size:18px;line-height:1.8">Tell me what you sell. I’ll build what runs it.</p>
+    </div>
+    <div class="tag">
+      <h3>The toolkit</h3>
+      <ul><li>PHP + MySQL / MariaDB systems</li><li>HTML, CSS, JavaScript front ends</li><li>Role-based logins (admin, staff, customer)</li><li>Hosting setup and deployment</li><li>Mobile-first, works on any phone</li></ul>
+    </div>
+  </div>
+</div></section>
+
+<section id="work">
+  <div class="pin">
+    <div id="track">
+      <div class="intro"><span class="marker">keep scrolling →</span><h2>Selected work</h2></div>
+      <article class="card" tabindex="0"><span class="big">01</span><div><h3>Donutella</h3><p>Donut ordering and management system with customer, staff and admin roles.</p></div><div><div class="more"><p>Tap again to close. Menu management, order flow and business rules built for a real shop workflow.</p></div><div class="chips"><i>PHP</i><i>MariaDB</i><i>Admin panel</i></div></div></article>
+      <article class="card" tabindex="0"><span class="big">02</span><div><h3>Matcha Orders</h3><p>Ordering and management system for a friend’s matcha drinks business.</p></div><div><div class="more"><p>Customers order drinks online; the owner tracks and manages orders in one place.</p></div><div class="chips"><i>Ordering</i><i>Management</i><i>Live client</i></div></div></article>
+      <article class="card" tabindex="0"><span class="big">03</span><div><h3>Auto Order Tray</h3><p>Automatic ordering tray system built during my internship.</p></div><div><div class="more"><p>A company-internal tool that replaced manual ordering with a simple automated flow.</p></div><div class="chips"><i>Internal tool</i><i>Automation</i><i>Internship</i></div></div></article>
+      <div class="intro" style="flex-basis:360px"><h2 style="color:#000;font-size:clamp(50px,8vw,110px)">Yours<br>next?</h2><a class="btn" href="#contact" style="margin:20px 0 0">Let’s talk</a></div>
+    </div>
+    <div class="prog"><b id="pb"></b></div>
+  </div>
+</section>
+
+<section id="services"><div class="wrap">
+  <h2 class="reveal"><span>What we build</span></h2>
+  <div class="grid">
+    <button class="flip"><div class="in2"><div class="face front"><h3>Business websites</h3><span class="marker" style="font-size:13px">tap to flip</span></div><div class="face back"><p>Fast, mobile-first sites that explain what you do and make people message you.</p></div></div></button>
+    <button class="flip"><div class="in2"><div class="face front"><h3>Ordering systems</h3><span class="marker" style="font-size:13px">tap to flip</span></div><div class="face back"><p>Customers order online, you manage orders, menu and stock from one dashboard.</p></div></div></button>
+    <button class="flip"><div class="in2"><div class="face front"><h3>Admin dashboards</h3><span class="marker" style="font-size:13px">tap to flip</span></div><div class="face back"><p>Role-based logins, reports and records so your team stops using paper and chat threads.</p></div></div></button>
+    <button class="flip"><div class="in2"><div class="face front"><h3>Redesigns</h3><span class="marker" style="font-size:13px">tap to flip</span></div><div class="face back"><p>Got an old site or system? We upgrade it without breaking what already works.</p></div></div></button>
+  </div>
+</div></section>
+
+<section id="contact"><div class="wrap">
+  <h2 class="reveal"><span>Got a project?</span></h2>
+  <span class="marker">drop us a message, no cap</span>
+  <a class="btn" id="mail" href="mailto:hello@redup.example">Email Redup</a>
+  <a class="btn" href="https://wa.me/60000000000" target="_blank" rel="noopener">WhatsApp</a>
+  <footer>© 2026 Redup. Built in Malaysia.</footer>
+</div></section>
+
+<script>
+(function(){
+var $=function(s,c){return(c||document).querySelector(s)},$$=function(s,c){return[].slice.call((c||document).querySelectorAll(s))};
+var reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
+/* logo letters react to cursor */
+var letters=$$('#logo span');
+function pushLetters(x,y){letters.forEach(function(l){var r=l.getBoundingClientRect(),dx=x-(r.left+r.width/2),dy=y-(r.top+r.height/2),d=Math.hypot(dx,dy),f=Math.max(0,1-d/320);l.style.transform='translate('+(-dx*f*.25)+'px,'+(-dy*f*.25)+'px) rotate('+(-dx*f*.06)+'deg) scale('+(1+f*.12)+')'})}
+if(!reduce){addEventListener('pointermove',function(e){pushLetters(e.clientX,e.clientY)});$('#hero').addEventListener('pointerleave',function(){letters.forEach(function(l){l.style.transform=''})})}
+/* draggable stickers */
+$$('.sticker').forEach(function(s){var sx,sy,ox=0,oy=0,drag=false;s._ox=0;s._oy=0;
+s.addEventListener('pointerdown',function(e){drag=true;sx=e.clientX-s._ox;sy=e.clientY-s._oy;s.setPointerCapture(e.pointerId)});
+s.addEventListener('pointermove',function(e){if(!drag)return;s._ox=e.clientX-sx;s._oy=e.clientY-sy;place(s)});
+s.addEventListener('pointerup',function(){drag=false});
+s._rot=s.style.transform;});
+function place(s){s.style.translate=s._ox+'px '+(s._oy+(s._py||0))+'px'}
+/* reveal text */
+var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}})},{threshold:.4});
+$$('.reveal').forEach(function(r){io.observe(r)});
+/* flip + card toggles */
+$$('.flip').forEach(function(f){f.addEventListener('click',function(){f.classList.toggle('on')})});
+$$('.card').forEach(function(c){function t(){c.classList.toggle('open')}c.addEventListener('click',t);c.addEventListener('keydown',function(e){if(e.key==='Enter'||e.key===' '){e.preventDefault();t()}})});
+/* scroll-driven */
+var track=$('#track'),work=$('#work'),band=$('#m1'),bar=$('#bar'),pb=$('#pb'),stickers=$$('.sticker'),lastY=scrollY,vel=0,bx=0,ticking=false;
+function sizeWork(){var dist=track.scrollWidth-innerWidth;work.style.height=(dist+innerHeight)+'px';return dist}
+var dist=sizeWork();addEventListener('resize',function(){dist=sizeWork()});addEventListener('load',function(){dist=sizeWork()});
+function frame(){ticking=false;var y=scrollY,max=document.documentElement.scrollHeight-innerHeight;
+bar.style.width=(y/max*100)+'%';
+if(!reduce){vel+=(y-lastY-vel)*.2;lastY=y;bx-=1.2+Math.abs(vel)*.5;if(bx<-band.scrollWidth/4)bx=0;
+band.style.transform='translateX('+bx+'px) skewX('+(-vel*.4)+'deg)';
+stickers.forEach(function(s){s._py=y*parseFloat(s.dataset.px)*-1;place(s)});}
+var r=work.getBoundingClientRect(),p=Math.min(1,Math.max(0,-r.top/(work.offsetHeight-innerHeight)));
+track.style.transform='translateX('+(-p*dist)+'px)';pb.style.width=(p*100)+'%';
+if(!reduce&&Math.abs(vel)>.1)requestAnimationFrame(frame)}
+function req(){if(!ticking){ticking=true;requestAnimationFrame(frame)}}
+addEventListener('scroll',req,{passive:true});
+if(!reduce){(function loop(){bx-=.8;if(bx<-band.scrollWidth/4)bx=0;vel*=.9;band.style.transform='translateX('+bx+'px) skewX('+(-vel*.4)+'deg)';requestAnimationFrame(loop)})()}
+frame();
+})();
+</script>
+</body>
+</html>
